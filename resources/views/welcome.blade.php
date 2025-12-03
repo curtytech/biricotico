@@ -185,7 +185,7 @@
 
         <!-- Bars / Localizado -->
         <section id="bars" class="max-w-6xl mx-auto px-6 py-12">
-            <h3 class="text-2xl font-bold text-white">Bares Participantes </h3>            
+            <h3 class="text-2xl font-bold text-white text-center">Bares Participantes </h3>
 
             <div class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div class="w-full flex flex-col bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-500 rounded-xl pb-4">
@@ -211,8 +211,6 @@
             </div>
         </section>
 
-        <!-- Mulher no Bar -->
-        <!-- Mulher no Bar Hero -->
         <section id="women" class="relative overflow-hidden">
             <div class="absolute inset-0 bg-gradient-to-br from-pink-500 via-rose-500 to-amber-500 opacity-90"></div>
             <div class="relative max-w-7xl mx-auto px-6 py-20 md:py-32 text-center text-white">
@@ -220,7 +218,7 @@
                     Mulher no Bar
                 </h2>
                 <p class="mt-4 text-lg md:text-xl max-w-3xl mx-auto drop-shadow">
-                    Segurança, descontos e voz — um espaço feito por elas, para elas. 
+                    Segurança, descontos e voz — um espaço feito por elas, para elas.
                     Junte-se à revolução rosa e âmbar que transforma a noite carioca.
                 </p>
                 <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
@@ -244,10 +242,10 @@
                 </div>
                 <div class="md:w-1/2 mt-4 md:mt-0">
                     <ul class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                        <li class="p-3 bg-white rounded">Descontos para mulheres</li>
-                        <li class="p-3 bg-white rounded">Canal de denúncia</li>
-                        <li class="p-3 bg-white rounded">Eventos exclusivos</li>
-                        <li class="p-3 bg-white rounded">Check-in de segurança</li>
+                        <li class="p-3 bg-gradient-to-br from-pink-500 via-rose-500 to-amber-500 opacity-90 text-white font-bold rounded">Descontos para mulheres</li>
+                        <li class="p-3 bg-gradient-to-br from-pink-500 via-rose-500 to-amber-500 opacity-90 text-white font-bold rounded">Canal de denúncia</li>
+                        <li class="p-3 bg-gradient-to-br from-pink-500 via-rose-500 to-amber-500 opacity-90 text-white font-bold rounded">Eventos exclusivos</li>
+                        <li class="p-3 bg-gradient-to-br from-pink-500 via-rose-500 to-amber-500 opacity-90 text-white font-bold rounded">Check-in de segurança</li>
                     </ul>
                 </div>
             </div>
@@ -255,19 +253,76 @@
 
         <!-- Stories / Histórias de Cantores e Bar -->
         <section id="stories" class="max-w-6xl mx-auto px-6 py-12">
-            <h3 class="text-2xl font-bold text-white">Notícias e Histórias</h3>
-            <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="p-4 bg-white rounded-xl shadow">
-                    <h4 class="font-bold">Cartola — O mito</h4>
-                    <p class="text-sm text-slate-600 mt-2">Biografia resumida com curiosidades e discos que marcaram época.</p>
+            <h3 class="text-2xl font-bold text-white text-center">Notícias e Histórias</h3>
+            <div class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="antialiased text-gray-900 ">
+                    <div class="bg-white rounded-lg overflow-hidden shadow-2xl  group overflow-hidden transition-transform duration-300 hover:translate-y-[-10px]">
+                        <div class="h-48 w-full overflow-hidden">
+                            <img class="h-full w-full object-cover transform overflow-hidden transition-transform duration-[300ms] group-hover:scale-125 object-end" src="https://images.unsplash.com/photo-1570797197190-8e003a00c846?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=968&q=80" alt="Home in Countryside" />
+                        </div>
+
+                        <div class="p-6 pb-4 group-hover:bg-gray-700 duration-[0.3s]">
+                            <h4 class="mt-1 font-semibold text-xl leading-tight truncate group-hover:text-amber-600 duration-[0.3s]">Cartola — O mito</h4>
+                            <p class="Card-info text-gray-500 mt-2 group-hover:text-amber-400">
+                                Biografia resumida com curiosidades e discos que marcaram época. </p>
+
+                            <div class="mt-4 flex items-center">
+                                <div class="flex-shrink-0">
+                                    <a href="#">
+                                        <span class="sr-only text-amber-600">Daniela Metz</span>
+                                        <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=2&amp;w=256&amp;h=256&amp;q=80" alt="">
+                                    </a>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-sm font-medium text-gray-900">
+                                        <a href="#" class="hover:underline hover:text-amber-600  duration-[0.3s]">Daniela Metz</a>
+                                    </p>
+                                    <div class="flex space-x-1 text-sm text-gray-500 group-hover:text-white duration-[0.3s] ">
+                                        <time datetime="2020-02-12 ">Feb 12, 2020</time>
+                                        <span aria-hidden="true">·</span>
+                                        <span>Entrada Franca</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="p-4 bg-white rounded-xl shadow">
-                    <h4 class="font-bold">Boteco da Gema — O ponto</h4>
-                    <p class="text-sm text-slate-600 mt-2">A história do bar, os causos e as noites memoráveis.</p>
+                <div class="antialiased text-gray-900 ">
+                    <div class="bg-white rounded-lg overflow-hidden shadow-2xl  group overflow-hidden transition-transform duration-300 hover:translate-y-[-10px]">
+                        <div class="h-48 w-full overflow-hidden">
+                            <img class="h-full w-full object-cover transform overflow-hidden transition-transform duration-[300ms] group-hover:scale-125 object-end" src="https://images.unsplash.com/photo-1570797197190-8e003a00c846?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=968&q=80" alt="Home in Countryside" />
+                        </div>
+
+                        <div class="p-6 pb-4 group-hover:bg-gray-700 duration-[0.3s]">
+                            <h4 class="mt-1 font-semibold text-xl leading-tight truncate group-hover:text-amber-600 duration-[0.3s]">Boteco da Gema — O ponto</h4>
+                            <p class="Card-info text-gray-500 mt-2 group-hover:text-amber-400">A história do bar, os causos e as noites memoráveis. </p>
+                            <div class="mt-4 flex items-center">
+                                <div class="flex-shrink-0">
+                                    <a href="#">
+                                        <span class="sr-only text-amber-600">Daniela Metz</span>
+                                        <img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=2&amp;w=256&amp;h=256&amp;q=80" alt="">
+                                    </a>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-sm font-medium text-gray-900">
+                                        <a href="#" class="hover:underline hover:text-amber-600  duration-[0.3s]">Daniela Metz</a>
+                                    </p>
+                                    <div class="flex space-x-1 text-sm text-gray-500 group-hover:text-white duration-[0.3s] ">
+                                        <time datetime="2020-02-12 ">Feb 12, 2020</time>
+                                        <span aria-hidden="true">·</span>
+                                        <span>Entrada Franca</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+
+
+
             </div>
         </section>
-     
+
         <footer class="mt-12 bg-slate-900 text-white py-12">
             <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-3 gap-6">
                 <div>
@@ -291,7 +346,9 @@
                     </div>
                 </div>
             </div>
-            <div class="mt-8 text-center text-slate-500 text-sm">© 2025 Biricotico • Feito com samba ❤️</div>
+            <a href="https://phelipecurty.vercel.app" target="_blank">
+                <div class="mt-8 text-center text-slate-500 text-sm">© 2025 Phelipe Curty ❤️</div>
+            </a>
         </footer>
     </main>
 
