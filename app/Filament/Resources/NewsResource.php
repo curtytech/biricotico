@@ -17,18 +17,47 @@ class NewsResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-newspaper';
 
+    protected static ?string $navigationLabel = 'Notícias';
+
+    protected static ?string $modelLabel = 'Notícia';
+
+    protected static ?string $pluralModelLabel = 'Notícias';
+
+
+
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
                 Forms\Components\Select::make('user_id')
                     ->relationship('user', 'name')
-                    ->visible(fn () => auth()->user()?->role === 'admin')
-                    ->default(fn () => auth()->id()),
-                Forms\Components\TextInput::make('name')->required(),
-                Forms\Components\TextInput::make('description')->required(),
-                Forms\Components\TextInput::make('banner')->required(),
-                Forms\Components\TextInput::make('external_link')->required(),
+                    ->visible(fn() => auth()->user()?->role === 'admin')
+                    ->default(fn() => auth()->id())
+                    ->required(),
+                Forms\Components\TextInput::make('name')
+                    ->label('Nome')
+                    ->required()
+                    ->maxLength(100),
+                Forms\Components\TextInput::make('description')
+                    ->label('Descrição')
+                    ->required()
+                    ->maxLength(500),
+                Forms\Components\RichEditor::make('content')
+                    ->label('Conteúdo')
+                    ->required()
+                    ->columnSpanFull(),
+                Forms\Components\FileUpload::make('banner')
+                    ->label('Banner')
+                    ->required()
+                    ->image()
+                    ->disk('public')
+                    ->directory('news')
+                    ->maxSize(2048),
+                Forms\Components\TextInput::make('external_link')
+                    ->label('Link Externo')
+                    ->required()
+                    ->url()
+                    ->maxLength(255),
             ])
             ->columns(2);
     }

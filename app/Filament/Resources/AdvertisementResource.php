@@ -21,18 +21,33 @@ class AdvertisementResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\Select::make('user_id')
-                    ->relationship('user', 'name')
-                    ->visible(fn () => auth()->user()?->role === 'admin')
-                    ->default(fn () => auth()->id()),
-                Forms\Components\TextInput::make('name')->required(),
-                Forms\Components\TextInput::make('description')->required(),
-                Forms\Components\TextInput::make('banner')->required(),
-                Forms\Components\TextInput::make('external_link')->required(),
-            ])
-            ->columns(2);
+                Forms\Components\Section::make('Advertisement Details')
+                    ->schema([
+                        Forms\Components\Select::make('user_id')
+                            ->relationship('user', 'name')
+                            ->visible(fn () => auth()->user()?->role === 'admin')
+                            ->default(fn () => auth()->id())
+                            ->required(),
+                        Forms\Components\TextInput::make('name')
+                            ->required()
+                            ->maxLength(255),
+                        Forms\Components\Textarea::make('description')
+                            ->required()
+                            ->maxLength(1000)
+                            ->rows(3),
+                        Forms\Components\FileUpload::make('banner')
+                            ->required()
+                            ->image()
+                            ->maxSize(2048)
+                            ->directory('advertisements/banners'),
+                        Forms\Components\TextInput::make('external_link')
+                            ->required()
+                            ->url()
+                            ->maxLength(255),
+                    ])
+                    ->columns(2),
+            ]);
     }
-
     public static function table(Table $table): Table
     {
         return $table

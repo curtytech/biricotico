@@ -17,46 +17,83 @@ class UserResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-user';
 
+    protected static ?string $navigationLabel = 'Usuários';
+
+    protected static ?string $modelLabel = 'Usuário';
+
+    protected static ?string $pluralModelLabel = 'Usuários';
+
+
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('name')->required(),
-                Forms\Components\TextInput::make('slug')->required(),
-                Forms\Components\TextInput::make('image'),
-                Forms\Components\TextInput::make('primary_color'),
-                Forms\Components\TextInput::make('secondary_color'),
-                Forms\Components\TextInput::make('template'),
-                Forms\Components\TextInput::make('cover_image'),
-                Forms\Components\TextInput::make('email')->email()->required(),
-                Forms\Components\TextInput::make('facebook'),
-                Forms\Components\TextInput::make('whatsapp'),
-                Forms\Components\TextInput::make('instagram'),
-                Forms\Components\TextInput::make('twitter'),
-                Forms\Components\TextInput::make('linkedin'),
-                Forms\Components\KeyValue::make('other_social_networks'),
-                Forms\Components\TextInput::make('phone'),
-                Forms\Components\TextInput::make('address'),
-                Forms\Components\TextInput::make('number'),
-                Forms\Components\TextInput::make('city'),
-                Forms\Components\TextInput::make('state'),
-                Forms\Components\TextInput::make('neighborhood'),
-                Forms\Components\TextInput::make('country'),
-                Forms\Components\TextInput::make('zipcode'),
-                Forms\Components\TextInput::make('location_link'),
-                Forms\Components\TextInput::make('password')
-                    ->password()
-                    ->dehydrated(fn ($state) => filled($state))
-                    ->required(fn ($livewire) => $livewire instanceof Pages\CreateUser),
-                Forms\Components\Select::make('role')
-                    ->options([
-                        'admin' => 'Admin',
-                        'user' => 'User',
+                Forms\Components\Section::make('Informações Básicas')
+                    ->schema([
+                        Forms\Components\TextInput::make('name')->required()->label('Nome'),
+                        Forms\Components\TextInput::make('slug')->required()->label('Link'),
+                        Forms\Components\TextInput::make('email')->email()->required()->label('E-mail'),
+                        Forms\Components\TextInput::make('phone')->label('Telefone'),
+                        Forms\Components\TextInput::make('password')->label('Senha')
+                            ->password()
+                            ->dehydrated(fn($state) => filled($state))
+                            ->required(fn($livewire) => $livewire instanceof Pages\CreateUser),
+
+                        // Forms\Components\Select::make('role')
+                        //     ->options([
+                        //         'admin' => 'Admin',
+                        //         'user' => 'User',
+                        //     ])
+                        //     ->visible(fn() => auth()->user()?->role === 'admin')
+                        //     ->default('user'),
                     ])
-                    ->visible(fn () => auth()->user()?->role === 'admin')
-                    ->default('user'),
-            ])
-            ->columns(2);
+                    ->columns(2),
+
+                Forms\Components\Section::make('Aparência')
+                    ->schema([
+                        Forms\Components\FileUpload::make('image')
+                            ->label('Imagem')
+                            ->image()
+                            ->disk('public')
+                            ->directory('products')
+                            ->imageEditor(),
+                        Forms\Components\FileUpload::make('cover_image')
+                            ->label('Imagem de Capa')
+                            ->image()
+                            ->disk('public')
+                            ->directory('products')
+                            ->imageEditor(),
+                        Forms\Components\TextInput::make('primary_color')->label('Cor Primária'),
+                        Forms\Components\TextInput::make('secondary_color')->label('Cor Secundária'),
+                        // Forms\Components\TextInput::make('template')->label('Template'),
+                    ])
+                    ->columns(2),
+
+                Forms\Components\Section::make('Redes Sociais')
+                    ->schema([
+                        Forms\Components\TextInput::make('facebook')->label('Facebook'),
+                        Forms\Components\TextInput::make('whatsapp')->label('WhatsApp'),
+                        Forms\Components\TextInput::make('instagram')->label('Instagram'),
+                        Forms\Components\TextInput::make('twitter')->label('Twitter'),
+                        Forms\Components\TextInput::make('linkedin')->label('LinkedIn'),
+                        Forms\Components\KeyValue::make('other_social_networks')->label('Outras Redes Sociais'),
+                    ])
+                    ->columns(2),
+
+                Forms\Components\Section::make('Endereço')
+                    ->schema([
+                        Forms\Components\TextInput::make('address')->label('Endereço'),
+                        Forms\Components\TextInput::make('number')->label('Número'),
+                        Forms\Components\TextInput::make('neighborhood')->label('Bairro'),
+                        Forms\Components\TextInput::make('city')->label('Cidade'),
+                        Forms\Components\TextInput::make('state')->label('Estado'),
+                        Forms\Components\TextInput::make('country')->label('País'),
+                        Forms\Components\TextInput::make('zipcode')->label('CEP'),
+                        Forms\Components\TextInput::make('location_link')->label('Link de Localização'),
+                    ])
+                    ->columns(2),
+
+            ]);
     }
 
     public static function table(Table $table): Table
@@ -75,7 +112,7 @@ class UserResource extends Resource
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make()
-                    ->visible(fn () => auth()->user()?->role === 'admin'),
+                    ->visible(fn() => auth()->user()?->role === 'admin'),
             ]);
     }
 

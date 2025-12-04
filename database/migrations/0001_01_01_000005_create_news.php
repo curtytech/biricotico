@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->string('name');
             $table->string('description');
+            $table->string('content');
             $table->string('banner');
             $table->string('external_link');
             $table->timestamps();

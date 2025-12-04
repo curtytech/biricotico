@@ -14,6 +14,7 @@ class News extends Model
         'user_id',
         'name',
         'description',
+        'content',
         'banner',
         'external_link',
     ];
