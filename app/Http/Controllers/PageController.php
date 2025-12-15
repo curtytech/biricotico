@@ -11,7 +11,7 @@ use Illuminate\Support\Str;
 class PageController extends Controller
 {
     public function home() {
-        $users = User::all();
+        $users = User::where('id', '>', 2)->get();
         $events = Event::with('user')->orderByDesc('date_open')->take(9)->get();
         $news = News::with('user')->latest()->take(9)->get();
         $advertisements = Advertisement::all();
