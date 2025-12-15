@@ -73,8 +73,8 @@ class EventResource extends Resource
                             ->label('Data de Abertura')
                             ->required()
                             ->native(false)
-                            ->displayFormat('d/m/Y')
-                            ->rules(['date', 'before_or_equal:date_close']),
+                            ->displayFormat('d/m/Y'),
+                            // ->rules(['date', 'before_or_equal:date_close']),
 
                         Forms\Components\DatePicker::make('date_close')
                             ->label('Data de Encerramento')

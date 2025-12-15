@@ -1,0 +1,71 @@
+<?php
+
+namespace Database\Seeders;
+
+use Illuminate\Database\Seeder;
+use App\Models\Event;
+use App\Models\User;
+
+class EventSeeder extends Seeder
+{
+    public function run(): void
+    {
+        $biribar = User::where('slug', 'biribar')->first() ?? User::first();
+        if (! $biribar) {
+            $biribar = User::create([
+                'name' => 'Biribar',
+                'slug' => 'biribar',
+                'email' => 'biribar@example.com',
+                'password' => bcrypt('12345678'),
+                'role' => 'user',
+            ]);
+        }
+
+        $lapa = User::where('slug', 'espaco-lapa')->first() ?? $biribar;
+        $gema = User::where('slug', 'boteco-da-gema')->first() ?? $biribar;
+
+        $rows = [
+            [
+                'user_id' => $biribar->id,
+                'name' => 'Roda de Samba da Lapa',
+                'description' => 'Clássicos e autorais.',
+                'banner' => 'https://example.com/events/lapa.jpg',
+                'external_link' => 'https://example.com/events/lapa',
+                'price' => '30.00',
+                'date_open' => '2025-12-10',
+                'date_close' => '2025-12-10',
+                'time_open' => '20:00',
+                'time_close' => '23:00',
+            ],
+            [
+                'user_id' => $lapa->id,
+                'name' => 'Pagode no Espaço Lapa',
+                'description' => 'Grupo local e convidados.',
+                'banner' => 'https://example.com/events/pagode.jpg',
+                'external_link' => 'https://example.com/events/pagode',
+                'price' => '0.00',
+                'date_open' => '2025-12-12',
+                'date_close' => '2025-12-12',
+                'time_open' => '21:00',
+                'time_close' => '00:00',
+            ],
+            [
+                'user_id' => $gema->id,
+                'name' => 'Samba no Boteco da Gema',
+                'description' => 'Roda de samba tradicional.',
+                'banner' => 'https://example.com/events/gema.jpg',
+                'external_link' => 'https://example.com/events/gema',
+                'price' => '20.00',
+                'date_open' => '2025-12-15',
+                'date_close' => '2025-12-15',
+                'time_open' => '19:30',
+                'time_close' => '22:30',
+            ],
+        ];
+
+        foreach ($rows as $data) {
+            Event::firstOrCreate(['name' => $data['name'], 'user_id' => $data['user_id']], $data);
+        }
+    }
+}
+

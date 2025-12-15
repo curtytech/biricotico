@@ -52,8 +52,6 @@
                 <a href="#features" class="text-white text-sm ">Funcionalidades</a>
                 <a href="#events" class="text-white text-sm ">Shows</a>
                 <a href="#bars" class="text-white text-sm ">Bares</a>
-                <a href="#bars" class="text-white text-sm ">Mulher no Bar</a>
-                <a href="#bars" class="text-white text-sm ">Notícias e Histórias</a>
                 <a href="/register" class="text-white px-3 py-2 rounded-md bg-amber-500 text-white font-semibold shadow">Gerar QR</a>
                 <a href="/admin" class="text-white px-3 py-2 rounded-md bg-amber-500 text-white font-semibold shadow">Área Restrita</a>
             </div>
@@ -62,23 +60,34 @@
 
     <main class="pt-28">
         <section class="relative min-h-screen flex items-center justify-center bg-gray-900">
-            <div class="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-50" style="background-image: url({{ asset('img/biricotico.jpg') }})"></div>
+            <div class="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-50" style="background-image: url({{ $user->cover_image ?? asset('img/biricotico.jpg') }})"></div>
             <div class="absolute inset-0 bg-amber-500 opacity-5"></div>
             <div class="relative max-w-7xl mx-auto w-full py-12 md:py-20 px-4 sm:px-6 lg:px-8 text-center">
                 <span class="animate-pulse" style="animation-duration: 4s;">
-                    <div class="inline-block mb-5">
-                        <span class="font-medium text-white rounded-lg p-4 bg-amber-500">O melhor da sua cidade</span>
+                    <div class="inline-block mb-3">
+                        <img class="w-20 h-20 rounded-full object-cover ring-2 ring-amber-500" src="{{ $user->image ?? 'https://images.unsplash.com/photo-1665686310934-8fab52b3821b?auto=format&fit=crop&w=256&q=60' }}" alt="avatar" />
+
                     </div>
                     <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 sm:mb-6 leading-tight">
-                        <span class="text-white block mt-2">Conectando bares, eventos e gente do Brasil</span>
+                        <span class="text-white block mt-2">{{ $user->name }}</span>
                     </h1>
-                    <p class="text-base sm:text-lg md:text-xl text-white mb-6 sm:mb-8 leading-relaxed max-w-3xl mx-auto">
-                        Aumente a festa: promoções exclusivas, notícias de eventos, histórias de cantores, shows, promoções exclusivas para mulheres e a união dos bares da sua cidade — tudo acessível com um único lugar.</p>
+                    <div class="flex items-center justify-center gap-4 mb-6">
+                        <div class="text-left text-white">
+                            <p class="text-sm">{{ $user->address }}{{ $user->number ? ', '.$user->number : '' }} – {{ $user->neighborhood ?? $user->city }}{{ $user->state ? ', '.$user->state : '' }}</p>
+                            <p class="text-sm">{{ $user->phone }}</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-center gap-3 mb-8">
+                        @if($user->facebook)<a class="text-white" href="{{ $user->facebook }}" target="_blank"><i class="fa-brands fa-facebook text-2xl"></i></a>@endif
+                        @if($user->instagram)<a class="text-white" href="{{ $user->instagram }}" target="_blank"><i class="fa-brands fa-instagram text-2xl"></i></a>@endif
+                        @if($user->twitter)<a class="text-white" href="{{ $user->twitter }}" target="_blank"><i class="fa-brands fa-x-twitter text-2xl"></i></a>@endif
+                        @if($user->linkedin)<a class="text-white" href="{{ $user->linkedin }}" target="_blank"><i class="fa-brands fa-linkedin text-2xl"></i></a>@endif
+                    </div>
                     <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
                         <a href="#contato" class="group inline-flex items-center gap-2 py-3 px-6 rounded-md bg-primary text-white hover:bg-amber-500 transition duration-300">
                             Procurar bares
                         </a>
-                        <a href="#portfolio" class="inline-flex items-center gap-2 py-3 px-6 rounded-md border border-border text-midnight_text dark:text-white hover:border-primary transition duration-300">
+                        <a href="" class="inline-flex items-center gap-2 py-3 px-6 rounded-md border border-border text-midnight_text dark:text-white hover:border-primary transition duration-300">
                             Gere seu QR Code
                         </a>
 
@@ -90,7 +99,7 @@
                 <a href="#services" class="">
                     <div class="inline-flex flex-col items-center text-white">
                         <div class="flex justify-center items-center my-5">
-                            <img id="qrPreview" src="https://api.qrserver.com/v1/create-qr-code/?size=140x140&data={{ env('APP_URL') }}" alt="QR" class="w-28 h-28 object-contain" />
+                            <img id="qrPreview" src="https://api.qrserver.com/v1/create-qr-code/?size=140x140&data={{ env('APP_URL') }}{{ $user->slug }}" alt="QR" class="w-28 h-28 object-contain" />
                         </div>
                         <a href="#events" class="text-xs sm:text-sm mb-2 flex items-center flex-col gap-2">
                             <p>
@@ -102,51 +111,73 @@
                         </a>
                     </div>
                 </a>
-
             </div>
         </section>
 
-        <section id="features" class="max-w-6xl mx-auto px-6 py-12 ">
-            <h3 class="text-2xl font-bold text-white text-center">Funcionalidades</h3>
-            <div class="mt-8 grid grid-cols-1 md:grid-cols-4 gap-6 ">
-                <div class="p-6 bg-amber-300 rounded-xl shadow glass flex flex-col items-center ">
-                    <div class="h-10 w-10 rounded-lg bg-amber-100 text-amber-600 flex items-center justify-center">
-                        <i class="fa-solid fa-newspaper"></i>
+        <section id="ads" class="max-w-6xl mx-auto px-6 py-12">
+            <h3 class="text-2xl font-bold text-center text-white">Promoções</h3>
+            <div class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-6">
+                @forelse($user->advertisements as $ad)
+                <div class="antialiased text-gray-900 ">
+                    <div class="bg-white rounded-lg overflow-hidden shadow-2xl  group overflow-hidden transition-transform duration-300 hover:translate-y-[-10px]">
+                        <div class="h-48 w-full overflow-hidden">
+                            <img class="h-full w-full object-cover transform overflow-hidden transition-transform duration-[300ms] group-hover:scale-125 object-end" src="{{ $ad->banner ?? 'https://images.unsplash.com/photo-1512428559087-560fa5ceab42?auto=format&fit=crop&w=1200&q=60' }}" alt="Home in Countryside" />
+                        </div>
+
+                        <div class="p-6 pb-4 group-hover:bg-gray-700 duration-[0.3s]">
+                            <h4 class="mt-1 font-semibold text-xl leading-tight truncate group-hover:text-amber-600 duration-[0.3s]">{{ $ad->name }}</h4>
+                            <p class="Card-info text-gray-500 mt-2 group-hover:text-amber-400">{{ $ad->description }}</p>
+                        </div>
                     </div>
-                    <h4 class="mt-3 font-bold text-black">Notícias</h4>
-                    <p class="text-sm mt-1 text-black text-center">Agenda e notícias sobre samba e pagode no Rio.</p>
                 </div>
-                <div class="p-6 bg-amber-800 rounded-xl shadow glass flex flex-col items-center ">
-                    <div class="h-10 w-10 rounded-lg bg-amber-100 text-amber-600 flex items-center justify-center">
-                        <i class="fa-solid fa-book-open"></i>
+                @empty
+                <p class="text-center text-slate-300">Nenhuma promoção cadastrada.</p>
+                @endforelse
+            </div>
+        </section>
+
+        <section id="news" class="max-w-6xl mx-auto px-6 py-12">
+            <h3 class="text-2xl font-bold text-center text-white">Notícias e Histórias</h3>
+            <div class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-6">
+                @forelse($user->news as $news)
+                <div class="antialiased text-gray-900 ">
+                    <div class="bg-white rounded-lg overflow-hidden shadow-2xl group overflow-hidden transition-transform duration-300 hover:translate-y-[-10px]">
+                        <div class="h-48 w-full overflow-hidden">
+                            <img class="h-full w-full object-cover transform overflow-hidden transition-transform duration-[300ms] group-hover:scale-125 object-end" src="{{ $news->banner ?? 'https://images.unsplash.com/photo-1512428559087-560fa5ceab42?auto=format&fit=crop&w=1200&q=60' }}" alt="Home in Countryside" />
+                        </div>
+
+                        <div class="p-6 pb-4 group-hover:bg-gray-700 duration-[0.3s]">
+                            <h4 class="mt-1 font-semibold text-xl leading-tight truncate group-hover:text-amber-600 duration-[0.3s]">{{ $news->name }}</h4>
+                            <p class="Card-info text-gray-500 mt-2 group-hover:text-amber-400">{{ $news->description }}</p>
+                            <div class="mt-4 flex items-center">
+                                <div class="flex-shrink-0">
+                                    <a href="#">
+                                        <span class="sr-only text-amber-600">{{ $user->name }}</span>
+                                        <img class="h-10 w-10 rounded-full" src="{{ $user->image }}" alt="">
+                                    </a>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-sm font-medium text-gray-900">
+                                        <a href="#" class="hover:text-amber-600 group-hover:text-amber-600 duration-[0.3s]">{{ $user->name }}</a>
+                                    </p>
+                                    <div class="flex space-x-1 text-sm text-gray-500 group-hover:text-amber-400 duration-[0.3s] ">
+                                        <time datetime="{{ $news->created_at->format('Y-m-d') }}">{{ $news->created_at->format('d/m/Y') }}</time>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <h4 class="mt-3 font-bold text-white">Histórias</h4>
-                    <p class="text-sm mt-1 text-white text-center">Biografias de cantores e causos dos bares.</p>
                 </div>
-                <div class="p-6 bg-amber-300 rounded-xl shadow glass flex flex-col items-center ">
-                    <div class="h-10 w-10 rounded-lg bg-amber-100 text-amber-600 flex items-center justify-center">
-                        <i class="fa-solid fa-handshake"></i>
-                    </div>
-                    <h4 class="mt-3 font-bold text-black">União dos Bares</h4>
-                    <p class="text-sm mt-1  text-center text-black">Plataforma oficial para integração de estabelecimentos.</p>
-                </div>
-                <div class="p-6 bg-amber-800 rounded-xl shadow glass flex flex-col items-center ">
-                    <div class="h-10 w-10 rounded-lg bg-amber-100 text-amber-600 flex items-center justify-center">
-                        <i class="fa-solid fa-tags"></i>
-                    </div>
-                    <h4 class="mt-3 font-bold text-white">Promoções</h4>
-                    <p class="text-sm mt-1 text-white text-center">Anúncios, descontos e campanhas especiais — com comissão por transação.</p>
-                </div>
+                @empty
+                <p class="text-center text-slate-300">Nenhuma notícia cadastrada.</p>
+                @endforelse
             </div>
         </section>
 
         <section id="events" class="max-w-6xl mx-auto px-6 py-12">
-            <!-- <div class="flex items-center justify-between "> -->
             <h3 class="text-2xl font-bold text-center text-white">Próximos Shows</h3>
-            <!-- <a href="#" class="text-amber-600 font-semibold">Ver calendário</a> -->
-            <!-- </div> -->
-            <div class="mt-6 grid grid-cols-3 gap-6">
-                @forelse($events as $event)
+            <div class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-6">
+                @forelse($user->events as $event)
                 <div class="antialiased text-gray-900">
                     <div class="bg-white rounded-lg overflow-hidden shadow-2xl group transition-transform duration-300 hover:-translate-y-2 relative">
                         <div class="h-48 w-full overflow-hidden relative">
@@ -189,19 +220,18 @@
                             <div class="mt-4 flex items-center">
                                 <div class="flex-shrink-0">
                                     <a href="#">
-                                        <span class="sr-only text-amber-600">{{ $event->user->name }}</span>
-                                        <img class="h-10 w-10 rounded-full" src="{{ $event->user->image ?? 'https://images.unsplash.com/photo-1512428559087-560fa5ceab42?auto=format&fit=crop&w=1200&q=60' }}" alt="">
+                                        <span class="sr-only text-amber-600">{{ $user->name }}</span>
+                                        <img class="h-10 w-10 rounded-full" src="{{ $user->image ?? 'https://images.unsplash.com/photo-1512428559087-560fa5ceab42?auto=format&fit=crop&w=1200&q=60' }}" alt="">
                                     </a>
                                 </div>
                                 <div class="ml-3">
-                                    <span class="text-sm font-medium hover:text-amber-600 duration-[0.3s] group-hover:text-amber-600">{{ $event->user->name }}</span>
+                                    <span class="text-sm font-medium hover:text-amber-600 duration-[0.3s] group-hover:text-amber-600">{{ $user->name }}</span>
                                     <div class="flex space-x-1 text-sm text-gray-500 duration-[0.3s] group-hover:text-amber-400 ">
                                         <span aria-hidden="true">Preço: R$:</span>
                                         <span>{{ $event->price }}</span>
                                     </div>
                                 </div>
                             </div>
-
 
                             @if($event->external_link)
                             <div class="mt-3">
@@ -217,40 +247,6 @@
                 @empty
                 <p class="text-center text-slate-300">Nenhum evento cadastrado.</p>
                 @endforelse
-
-            </div>
-        </section>
-
-        <!-- Bars / Localizado -->
-        <section id="bars" class="max-w-6xl mx-auto px-6 py-12">
-            <h3 class="text-2xl font-bold text-white text-center">Bares Participantes </h3>
-
-            <div class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-6">
-                @forelse($users as $user)
-                <a href="{{route('users.show', $user->slug)}}">
-                    <div class="w-full flex flex-col bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-500 rounded-xl pb-4">
-                        <div
-                            class="h-[3.5rem] relative rounded-t-xl bg-cover bg-center bg-[url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHwxMXx8Z3JvdXAlMjBwaG90byUyMG9mZmljZXxlbnwwfDB8fHwxNzQ0MTExNDU5fDA&ixlib=rb-4.0.3&q=80&w=1080')]">
-                            <img class=" absolute -bottom-8 left-2 z-10 w-[3.5rem] h-[3.5rem] rounded-full object-cover" src="https://images.unsplash.com/photo-1665686310934-8fab52b3821b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHw2fHx3b21hbnxlbnwwfDB8fHwxNzQ0MTExNjkzfDA&ixlib=rb-4.0.3&q=80&w=1080" alt="avater" />
-                        </div>
-                        <div class="mt-10 pl-4 w-[88%] flex flex-col">
-                            <h4 class="text-[14px] font-semibold dark:text-white">
-                                {{$user->name}}
-                            </h4>
-                            <p class=" text-[13px] mt-1 text-gray-600 dark:text-gray-300">
-                                {{$user->description}}
-                            </p>
-
-                            <hr class="border-[1.5px] w-12 mt-6 mb-2 border-gray-200 dark:border-gray-600 rounded" />
-
-                            <p class="text-[13px] text-gray-600 dark:text-gray-300">3 months ago</p>
-                        </div>
-                    </div>
-                </a>
-                @empty
-                <p>Crie o primeiro bar participante agora mesmo.</p>
-                @endforelse
-
             </div>
         </section>
 
@@ -294,44 +290,6 @@
             </div>
         </section>
 
-        <!-- Stories / Histórias de Cantores e Bar -->
-        <section id="stories" class="max-w-6xl mx-auto px-6 py-12">
-            <h3 class="text-2xl font-bold text-white text-center">Notícias e Histórias</h3>
-            <div class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-6">
-                @forelse($user->news as $news)
-                <div class="antialiased text-gray-900 ">
-                    <div class="bg-white rounded-lg overflow-hidden shadow-2xl  group overflow-hidden transition-transform duration-300 hover:translate-y-[-10px]">
-                        <div class="h-48 w-full overflow-hidden">
-                            <img class="h-full w-full object-cover transform overflow-hidden transition-transform duration-[300ms] group-hover:scale-125 object-end" src="{{ $news->banner ?? 'https://images.unsplash.com/photo-1512428559087-560fa5ceab42?auto=format&fit=crop&w=1200&q=60' }}" alt="Home in Countryside" />
-                        </div>
-
-                        <div class="p-6 pb-4 group-hover:bg-gray-700 duration-[0.3s]">
-                            <h4 class="mt-1 font-semibold text-xl leading-tight truncate group-hover:text-amber-600 duration-[0.3s]">{{ $news->name }}</h4>
-                            <p class="Card-info text-gray-500 mt-2 group-hover:text-amber-400">{{ $news->description }}</p>
-                            <div class="mt-4 flex items-center">
-                                <div class="flex-shrink-0">
-                                    <a href="#">
-                                        <span class="sr-only text-amber-600">{{ $user->name }}</span>
-                                        <img class="h-10 w-10 rounded-full" src="{{ $user->image }}" alt="">
-                                    </a>
-                                </div>
-                                <div class="ml-3">
-                                    <p class="text-sm font-medium text-gray-900">
-                                        <a href="#" class="hover:text-amber-600 group-hover:text-amber-600 duration-[0.3s]">{{ $user->name }}</a>
-                                    </p>
-                                    <div class="flex space-x-1 text-sm text-gray-500 group-hover:text-amber-400 duration-[0.3s] ">
-                                        <time datetime="{{ $news->created_at->format('Y-m-d') }}">{{ $news->created_at->format('d/m/Y') }}</time>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                @empty
-                <p class="text-center text-slate-300">Nenhuma notícia cadastrada.</p>
-                @endforelse
-            </div>
-        </section>
 
         <footer class="mt-12 bg-slate-900 text-white py-12">
             <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-3 gap-6">
@@ -349,12 +307,22 @@
                 </div>
                 <div>
                     <h5 class="font-semibold">Contato</h5>
-                    <p class="text-sm text-slate-400 mt-2">contato@biricotico.com</p>
-                    <div class="mt-3 flex gap-2">
+                    <p class="text-sm text-slate-400 mt-2">{{ $user->email }}</p>
+                    <p class="text-sm text-slate-400 mt-2">{{ $user->phone }}</p>
+                    <p class="text-sm text-slate-400 mt-2">{{ $user->address . ', ' . $user->number . ', ' . $user->neighborhood . ', ' . $user->city . ', ' . $user->state }}</p>
+                    <!-- <div class="mt-3 flex gap-2">
                         <button class="px-3 py-2 bg-amber-500 text-white rounded">Quero meu QR</button>
                         <button class="px-3 py-2 border border-amber-500 rounded">Seja parceiro</button>
+                    </div> -->
+
+                    <div class="mt-4 w-1/2">
+                        @if($user->location_link)
+                        {!! $user->location_link !!}
+                        @endif
+
                     </div>
                 </div>
+
             </div>
             <a href="https://phelipecurty.vercel.app" target="_blank">
                 <div class="mt-8 text-center text-slate-500 text-sm">© 2025 Phelipe Curty ❤️</div>
