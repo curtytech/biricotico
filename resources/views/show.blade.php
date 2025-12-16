@@ -45,7 +45,7 @@
         <nav class="max-w-6xl mx-auto flex items-center justify-between p-4 md:p-6">
             <div class="flex items-center gap-3">
                 <a href="/">
-                    <img src="{{ asset('img/logo.svg') }}" alt="Logo Biricotico" class="w-24">
+                    <img src="{{ asset('img/logo.png') }}" alt="Logo Biricotico" class="w-24">
                 </a>
             </div>
             <div class="hidden md:flex gap-4 items-center">

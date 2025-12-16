@@ -45,7 +45,7 @@
         <nav class="max-w-6xl mx-auto flex items-center justify-between p-4 md:p-6">
             <div class="flex items-center gap-3">
                 <a href="/">
-                    <img src="{{ asset('img/logo.svg') }}" alt="Logo Biricotico" class="w-24">
+                    <img src="{{ asset('img/logo.png') }}" alt="Logo Biricotico" class="w-32 md:w-40 object-contain" />
                 </a>
             </div>
             <div class="hidden md:flex gap-4 items-center">
@@ -107,7 +107,7 @@
         </section>
 
         <section id="features" class="max-w-6xl mx-auto px-6 py-12 ">
-            <h3 class="text-2xl font-bold text-white text-center">Funcionalidades</h3>
+            <h3 class="text-2xl font-bold text-white text-center">Funcionalidade</h3>
             <div class="mt-8 grid grid-cols-1 md:grid-cols-4 gap-6 ">
                 <div class="p-6 bg-amber-300 rounded-xl shadow glass flex flex-col items-center ">
                     <div class="h-10 w-10 rounded-lg bg-amber-100 text-amber-600 flex items-center justify-center">
@@ -222,37 +222,53 @@
         </section>
 
         <!-- Bars / Localizado -->
+
         <section id="bars" class="max-w-6xl mx-auto px-6 py-12">
             <h3 class="text-2xl font-bold text-white text-center">Bares Participantes </h3>
 
             <div class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-6">
                 @forelse($users as $user)
-                <a href="{{route('users.show', $user->slug)}}">
-                    <div class="w-full flex flex-col bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-500 rounded-xl pb-4">
-                        <div
-                            class="h-[3.5rem] relative rounded-t-xl bg-cover bg-center bg-[url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHwxMXx8Z3JvdXAlMjBwaG90byUyMG9mZmljZXxlbnwwfDB8fHwxNzQ0MTExNDU5fDA&ixlib=rb-4.0.3&q=80&w=1080')]">
-                            <img class=" absolute -bottom-8 left-2 z-10 w-[3.5rem] h-[3.5rem] rounded-full object-cover" src="https://images.unsplash.com/photo-1665686310934-8fab52b3821b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHw2fHx3b21hbnxlbnwwfDB8fHwxNzQ0MTExNjkzfDA&ixlib=rb-4.0.3&q=80&w=1080" alt="avater" />
-                        </div>
-                        <div class="mt-10 pl-4 w-[88%] flex flex-col">
-                            <h4 class="text-[14px] font-semibold dark:text-white">
-                                {{$user->name}}
-                            </h4>
-                            <p class=" text-[13px] mt-1 text-gray-600 dark:text-gray-300">
-                                {{$user->description}}
-                            </p>
+                    <a href="{{ route('users.show', $user->slug) }}">
+                        <div class="w-full flex flex-col bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-500 rounded-xl pb-4">
 
-                            <hr class="border-[1.5px] w-12 mt-6 mb-2 border-gray-200 dark:border-gray-600 rounded" />
+                            {{-- Fundo do card --}}
 
-                            <p class="text-[13px] text-gray-600 dark:text-gray-300">3 months ago</p>
+                            <div
+                                class="h-[3.5rem] relative rounded-t-xl bg-cover bg-center"
+                                style="background-image: url('{{ $user->cover_image }}');">
+
+                                {{-- Avatar --}}
+
+                                <img
+                                    class="absolute -bottom-8 left-2 z-10 w-[3.5rem] h-[3.5rem] rounded-full object-cover"
+                                    src="{{ $user->image }}"
+                                    alt="avatar do {{ $user->name }}"
+                                />
+                            </div>
+
+                            <div class="mt-10 pl-4 w-[88%] flex flex-col">
+                                <h4 class="text-[14px] font-semibold dark:text-white">
+                                    {{ $user->name }}
+                                </h4>
+
+                                <p class="text-[13px] mt-1 text-gray-600 dark:text-gray-300">
+                                    {{ $user->description }}
+                                </p>
+
+                                <hr class="border-[1.5px] w-12 mt-6 mb-2 border-gray-200 dark:border-gray-600 rounded" />
+
+                                <p class="text-[13px] text-gray-600 dark:text-gray-300">
+                                    {{ $user->created_at->diffForHumans() }}
+                                </p>
+                            </div>
                         </div>
-                    </div>
-                </a>
+                    </a>
                 @empty
-                <p>Crie o primeiro bar participante agora mesmo.</p>
+                    <p>Crie o primeiro bar participante agora mesmo.</p>
                 @endforelse
-
             </div>
         </section>
+
 
         <section id="women" class="relative overflow-hidden">
             <div class="absolute inset-0 bg-gradient-to-br from-pink-500 via-rose-500 to-amber-500 opacity-90"></div>
