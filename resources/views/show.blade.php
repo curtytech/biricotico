@@ -45,7 +45,7 @@
         <nav class="max-w-6xl mx-auto flex items-center justify-between p-4 md:p-6">
             <div class="flex items-center gap-3">
                 <a href="/">
-                    <img src="{{ asset('img/logo.png') }}" alt="Logo Biricotico" class="w-24">
+                    <img src="{{ asset('img/logo.png') }}" alt="Logo Biricotico" class="w-32 md:w-40 object-contain">
                 </a>
             </div>
             <div class="hidden md:flex gap-4 items-center">
@@ -57,7 +57,7 @@
             </div>
         </nav>
     </header>
-
+            
     <main class="pt-28">
         <section class="relative min-h-screen flex items-center justify-center bg-gray-900">
             <div class="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-50" style="background-image: url({{ $user->cover_image ?? asset('img/biricotico.jpg') }})"></div>
