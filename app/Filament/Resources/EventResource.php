@@ -115,11 +115,11 @@ class EventResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name')->searchable()->sortable(),
-                Tables\Columns\TextColumn::make('user.name')->label('User'),
-                Tables\Columns\TextColumn::make('price'),
-                Tables\Columns\TextColumn::make('date_open'),
-                Tables\Columns\TextColumn::make('created_at')->dateTime()->sortable(),
+                Tables\Columns\TextColumn::make('name')->searchable()->sortable() ->label('Nome'),
+                Tables\Columns\TextColumn::make('user.name')->label('Usuário'),
+                Tables\Columns\TextColumn::make('price')->label('Preço')->money('BRL', true),
+                Tables\Columns\TextColumn::make('date_open') ->label('Data de Abertura')->date(),
+                Tables\Columns\TextColumn::make('created_at')->dateTime()->sortable() ->label('Data de Criação'),
             ])
             ->filters([])
             ->actions([

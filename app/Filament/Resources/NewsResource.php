@@ -30,6 +30,7 @@ class NewsResource extends Resource
         return $form
             ->schema([
                 Forms\Components\Select::make('user_id')
+                    ->label('Usuário')
                     ->relationship('user', 'name')
                     ->visible(fn() => auth()->user()?->role === 'admin')
                     ->default(fn() => auth()->id())
@@ -66,10 +67,10 @@ class NewsResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name')->searchable()->sortable(),
-                Tables\Columns\TextColumn::make('user.name')->label('User'),
-                Tables\Columns\TextColumn::make('external_link'),
-                Tables\Columns\TextColumn::make('created_at')->dateTime()->sortable(),
+                Tables\Columns\TextColumn::make('name')->searchable()->sortable()->label('Nome'),
+                Tables\Columns\TextColumn::make('user.name')->label('Usuário'),
+                Tables\Columns\TextColumn::make('external_link') ->label('Link Externo'),
+                Tables\Columns\TextColumn::make('created_at')->dateTime()->sortable() ->label('Data de Criação'),
             ])
             ->filters([])
             ->actions([

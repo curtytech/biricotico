@@ -17,21 +17,34 @@ class AdvertisementResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-megaphone';
 
+    protected static ?string $navigationLabel = 'Anúncios';
+
+    protected static ?string $pluralLabel = 'Anúncios';
+
+    protected static ?string $label = 'Anúncio';
+
+    protected static ?string $createButtonLabel = 'Criar anúncio';
+
+
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\Section::make('Advertisement Details')
+                Forms\Components\Section::make('Detalhes do Anúncio')
+
                     ->schema([
                         Forms\Components\Select::make('user_id')
+                            ->label('Usuário')
                             ->relationship('user', 'name')
                             ->visible(fn () => auth()->user()?->role === 'admin')
                             ->default(fn () => auth()->id())
                             ->required(),
                         Forms\Components\TextInput::make('name')
+                            ->label('Nome')
                             ->required()
                             ->maxLength(255),
                         Forms\Components\Textarea::make('description')
+                            ->label('Descrição')
                             ->required()
                             ->maxLength(1000)
                             ->rows(3),
@@ -41,6 +54,7 @@ class AdvertisementResource extends Resource
                             ->maxSize(2048)
                             ->directory('advertisements/banners'),
                         Forms\Components\TextInput::make('external_link')
+                            ->label('Link Externo')
                             ->required()
                             ->url()
                             ->maxLength(255),
@@ -52,10 +66,10 @@ class AdvertisementResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name')->searchable()->sortable(),
-                Tables\Columns\TextColumn::make('user.name')->label('User'),
-                Tables\Columns\TextColumn::make('external_link'),
-                Tables\Columns\TextColumn::make('created_at')->dateTime()->sortable(),
+                Tables\Columns\TextColumn::make('name')->searchable()->sortable() -> label('Nome'),
+                Tables\Columns\TextColumn::make('user.name')->label('User') ->label('Usuário'),
+                Tables\Columns\TextColumn::make('external_link') -> label('Link Externo'),
+                Tables\Columns\TextColumn::make('created_at')->dateTime()->sortable() -> label ('Data de Criação'),
             ])
             ->filters([])
             ->actions([

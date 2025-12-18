@@ -100,11 +100,11 @@ class UserResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name')->searchable()->sortable(),
-                Tables\Columns\TextColumn::make('email')->searchable(),
-                Tables\Columns\TextColumn::make('slug')->searchable(),
-                Tables\Columns\TextColumn::make('role')->badge()->sortable(),
-                Tables\Columns\TextColumn::make('created_at')->dateTime()->sortable(),
+                Tables\Columns\TextColumn::make('name')->searchable()->sortable() ->label('Nome'),
+                Tables\Columns\TextColumn::make('email')->searchable() ->label('Email'),
+                Tables\Columns\TextColumn::make('slug')->searchable() ->label('Slug'),
+                Tables\Columns\TextColumn::make('role')->badge()->sortable() ->label('Cargo'),
+                Tables\Columns\TextColumn::make('created_at')->dateTime()->sortable() ->label('Data de Criação'),
             ])
             ->filters([])
             ->actions([
