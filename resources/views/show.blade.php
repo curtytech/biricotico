@@ -49,15 +49,15 @@
                 </a>
             </div>
             <div class="hidden md:flex gap-4 items-center">
-                <a href="#features" class="text-white text-sm ">Funcionalidades</a>
+                <a href="#ads" class="text-white text-sm ">Promoções</a>
+                <a href="#news" class="text-white text-sm ">Notícias & Histórias</a>
                 <a href="#events" class="text-white text-sm ">Shows</a>
-                <a href="#bars" class="text-white text-sm ">Bares</a>
                 <a href="/register" class="text-white px-3 py-2 rounded-md bg-amber-500 text-white font-semibold shadow">Gerar QR</a>
                 <a href="/admin" class="text-white px-3 py-2 rounded-md bg-amber-500 text-white font-semibold shadow">Área Restrita</a>
             </div>
         </nav>
     </header>
-            
+
     <main class="pt-28">
         <section class="relative min-h-screen flex items-center justify-center bg-gray-900">
             <div class="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-50" style="background-image: url({{ $user->cover_image ?? asset('img/biricotico.jpg') }})"></div>
@@ -137,7 +137,7 @@
         </section>
 
         <section id="news" class="max-w-6xl mx-auto px-6 py-12">
-            <h3 class="text-2xl font-bold text-center text-white">Notícias e Histórias</h3>
+            <h3 class="text-2xl font-bold text-center text-white">Notícias & Histórias</h3>
             <div class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-6">
                 @forelse($user->news as $news)
                 <div class="antialiased text-gray-900 ">
@@ -264,7 +264,7 @@
                     <a href="#women-details" class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white text-rose-600 font-semibold shadow-lg hover:scale-105 transition">
                         <i class="fa-solid fa-gift"></i> Ver vantagens
                     </a>
-                    <a href="/register" class="inline-flex items-center gap-2 px-6 py-3 rounded-full border-2 border-white text-white font-semibold hover:bg-white hover:text-rose-600 transition">
+                    <a href="#women-details" class="inline-flex items-center gap-2 px-6 py-3 rounded-full border-2 border-white text-white font-semibold hover:bg-white hover:text-rose-600 transition">
                         <i class="fa-solid fa-shield-halved"></i> Quero segurança
                     </a>
                 </div>
@@ -300,9 +300,10 @@
                 <div>
                     <h5 class="font-semibold">Links</h5>
                     <ul class="mt-2 text-sm text-slate-400 space-y-1">
-                        <li>Notícias</li>
-                        <li>Shows</li>
-                        <li>Bares</li>
+                        <a href="#ads" class="text-white hover:text-amber-400 transition"><li>Promoções</li></a>
+                        <a href="#news" class="text-white hover:text-amber-400 transition"><li>Notícias & Histórias</li></a>
+                        <a href="#events" class="text-white hover:text-amber-400 transition"><li>Shows</li></a>
+                        <a href="#women" class="text-white hover:text-amber-400 transition"><li>Mulheres no Bar</li></a>
                     </ul>
                 </div>
                 <div>
@@ -315,17 +316,29 @@
                         <button class="px-3 py-2 border border-amber-500 rounded">Seja parceiro</button>
                     </div> -->
 
-                    <div class="mt-4 w-1/2">
+                    <div class="mt-4 w-full md:w-1/2">
                         @if($user->location_link)
-                        {!! $user->location_link !!}
+                             <div class="mb-2">
+                                <a href="{{ $user->location_link }}" target="_blank" class="inline-flex items-center gap-2 text-amber-500 hover:text-amber-400 font-semibold transition">
+                                    <i class="fa-solid fa-map-location-dot"></i> Ver no Google Maps
+                                </a>
+                             </div>
                         @endif
-
+                        <iframe
+                            src="https://maps.google.com/maps?q={{ urlencode(($user->address ?? '') . ' ' . ($user->number ?? '') . ', ' . ($user->neighborhood ?? '') . ', ' . ($user->city ?? '') . ' - ' . ($user->state ?? '')) }}&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                            width="100%"
+                            height="250"
+                            class="rounded-lg shadow-lg border-0"
+                            allowfullscreen=""
+                            loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
                     </div>
                 </div>
 
             </div>
             <a href="https://phelipecurty.vercel.app" target="_blank">
-                <div class="mt-8 text-center text-slate-500 text-sm">© 2025 Phelipe Curty ❤️</div>
+                <div class="mt-8 text-center text-slate-500 text-sm">© 2025 Phelipe Curty</div>
             </a>
         </footer>
     </main>

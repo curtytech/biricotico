@@ -71,3 +71,9 @@ ln -s /home/u233139548/domains/cardapiovirtual.space/storage/app/public storage
 
 
 ln -s //home/u359724568/domains/mcboutique.com.br/storage/app/public storage
+
+/home/u233139548/domains/you.tec.br/public_html/blog
+
+cd ~/home/u233139548/domains/you.tec.br/public_html/storage/app/public storage
+
+ln -s /home/u233139548/domains/you.tec.br/public_html/blog/storage/app/public storage

@@ -51,9 +51,9 @@
             <div class="hidden md:flex gap-4 items-center">
                 <a href="#features" class="text-white text-sm ">Funcionalidades</a>
                 <a href="#events" class="text-white text-sm ">Shows</a>
-                <a href="#bars" class="text-white text-sm ">Bares</a>
-                <a href="#bars" class="text-white text-sm ">Mulher no Bar</a>
-                <a href="#bars" class="text-white text-sm ">Notícias e Histórias</a>
+                <a href="#ads" class="text-white text-sm ">Promoções</a>
+                <a href="#women" class="text-white text-sm ">Mulheres no Bar</a>
+                <a href="#news" class="text-white text-sm ">Notícias & Histórias</a>
                 <a href="/register" class="text-white px-3 py-2 rounded-md bg-amber-500 text-white font-semibold shadow">Gerar QR</a>
                 <a href="/admin" class="text-white px-3 py-2 rounded-md bg-amber-500 text-white font-semibold shadow">Área Restrita</a>
             </div>
@@ -228,43 +228,42 @@
 
             <div class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-6">
                 @forelse($users as $user)
-                    <a href="{{ route('users.show', $user->slug) }}">
-                        <div class="w-full flex flex-col bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-500 rounded-xl pb-4">
+                <a href="{{ route('users.show', $user->slug) }}">
+                    <div class="w-full flex flex-col bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-500 rounded-xl pb-4">
 
-                            {{-- Fundo do card --}}
+                        {{-- Fundo do card --}}
 
-                            <div
-                                class="h-[3.5rem] relative rounded-t-xl bg-cover bg-center"
-                                style="background-image: url('{{ $user->cover_image }}');">
+                        <div
+                            class="h-[3.5rem] relative rounded-t-xl bg-cover bg-center"
+                            style="background-image: url('{{ $user->cover_image }}');">
 
-                                {{-- Avatar --}}
+                            {{-- Avatar --}}
 
-                                <img
-                                    class="absolute -bottom-8 left-2 z-10 w-[3.5rem] h-[3.5rem] rounded-full object-cover"
-                                    src="{{ $user->image }}"
-                                    alt="avatar do {{ $user->name }}"
-                                />
-                            </div>
-
-                            <div class="mt-10 pl-4 w-[88%] flex flex-col">
-                                <h4 class="text-[14px] font-semibold dark:text-white">
-                                    {{ $user->name }}
-                                </h4>
-
-                                <p class="text-[13px] mt-1 text-gray-600 dark:text-gray-300">
-                                    {{ $user->description }}
-                                </p>
-
-                                <hr class="border-[1.5px] w-12 mt-6 mb-2 border-gray-200 dark:border-gray-600 rounded" />
-
-                                <p class="text-[13px] text-gray-600 dark:text-gray-300">
-                                    {{ $user->created_at->diffForHumans() }}
-                                </p>
-                            </div>
+                            <img
+                                class="absolute -bottom-8 left-2 z-10 w-[3.5rem] h-[3.5rem] rounded-full object-cover"
+                                src="{{ $user->image }}"
+                                alt="avatar do {{ $user->name }}" />
                         </div>
-                    </a>
+
+                        <div class="mt-10 pl-4 w-[88%] flex flex-col">
+                            <h4 class="text-[14px] font-semibold dark:text-white">
+                                {{ $user->name }}
+                            </h4>
+
+                            <p class="text-[13px] mt-1 text-gray-600 dark:text-gray-300">
+                                {{ $user->description }}
+                            </p>
+
+                            <hr class="border-[1.5px] w-12 mt-6 mb-2 border-gray-200 dark:border-gray-600 rounded" />
+
+                            <p class="text-[13px] text-gray-600 dark:text-gray-300">
+                                {{ $user->created_at->diffForHumans() }}
+                            </p>
+                        </div>
+                    </div>
+                </a>
                 @empty
-                    <p>Crie o primeiro bar participante agora mesmo.</p>
+                <p>Crie o primeiro bar participante agora mesmo.</p>
                 @endforelse
             </div>
         </section>
@@ -311,7 +310,7 @@
         </section>
 
         <!-- Stories / Histórias de Cantores e Bar -->
-        <section id="stories" class="max-w-6xl mx-auto px-6 py-12">
+        <section id="news" class="max-w-6xl mx-auto px-6 py-12">
             <h3 class="text-2xl font-bold text-white text-center">Notícias e Histórias</h3>
             <div class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-6">
                 @forelse($user->news as $news)
@@ -358,9 +357,21 @@
                 <div>
                     <h5 class="font-semibold">Links</h5>
                     <ul class="mt-2 text-sm text-slate-400 space-y-1">
-                        <li>Notícias</li>
-                        <li>Shows</li>
-                        <li>Bares</li>
+                        <a href="#features" class="text-white hover:text-amber-400 transition">
+                            <li>Funcionalidade</li>
+                        </a>
+                        <a href="#events" class="text-white hover:text-amber-400 transition">
+                            <li>Shows</li>
+                        </a>
+                        <a href="#ads" class="text-white hover:text-amber-400 transition">
+                            <li>Promoções</li>
+                        </a>
+                        <a href="#women" class="text-white hover:text-amber-400 transition">
+                            <li>Mulheres no Bar</li>
+                        </a>
+                        <a href="#news" class="text-white hover:text-amber-400 transition">
+                            <li>Notícias & Histórias</li>
+                        </a>
                     </ul>
                 </div>
                 <div>
@@ -373,7 +384,7 @@
                 </div>
             </div>
             <a href="https://phelipecurty.vercel.app" target="_blank">
-                <div class="mt-8 text-center text-slate-500 text-sm">© 2025 Phelipe Curty ❤️</div>
+                <div class="mt-8 text-center text-slate-500 text-sm">© 2025 Phelipe Curty</div>
             </a>
         </footer>
     </main>
