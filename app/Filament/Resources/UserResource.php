@@ -89,7 +89,8 @@ class UserResource extends Resource
                         Forms\Components\TextInput::make('state')->label('Estado'),
                         Forms\Components\TextInput::make('country')->label('País'),
                         Forms\Components\TextInput::make('zipcode')->label('CEP'),
-                        Forms\Components\TextInput::make('location_link')->label('Link de Localização'),
+                        Forms\Components\TextInput::make('location_link')->label('Link de Localização')->url()->maxLength(255),
+,
                     ])
                     ->columns(2),
 
