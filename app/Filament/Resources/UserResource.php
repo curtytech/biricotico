@@ -90,7 +90,6 @@ class UserResource extends Resource
                         Forms\Components\TextInput::make('country')->label('País'),
                         Forms\Components\TextInput::make('zipcode')->label('CEP'),
                         Forms\Components\TextInput::make('location_link')->label('Link de Localização')->url()->maxLength(255),
-,
                     ])
                     ->columns(2),
 
@@ -101,11 +100,11 @@ class UserResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name')->searchable()->sortable() ->label('Nome'),
-                Tables\Columns\TextColumn::make('email')->searchable() ->label('Email'),
-                Tables\Columns\TextColumn::make('slug')->searchable() ->label('Slug'),
-                Tables\Columns\TextColumn::make('role')->badge()->sortable() ->label('Cargo'),
-                Tables\Columns\TextColumn::make('created_at')->dateTime()->sortable() ->label('Data de Criação'),
+                Tables\Columns\TextColumn::make('name')->searchable()->sortable()->label('Nome'),
+                Tables\Columns\TextColumn::make('email')->searchable()->label('Email'),
+                Tables\Columns\TextColumn::make('slug')->searchable()->label('Slug'),
+                Tables\Columns\TextColumn::make('role')->badge()->sortable()->label('Cargo'),
+                Tables\Columns\TextColumn::make('created_at')->dateTime()->sortable()->label('Data de Criação'),
             ])
             ->filters([])
             ->actions([
