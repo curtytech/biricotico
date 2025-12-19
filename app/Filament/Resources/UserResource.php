@@ -31,7 +31,7 @@ class UserResource extends Resource
                 Forms\Components\Section::make('Informações Básicas')
                     ->schema([
                         Forms\Components\TextInput::make('name')->required()->label('Nome'),
-                        Forms\Components\TextInput::make('slug')->required()->label('Link'),
+                        Forms\Components\TextInput::make('slug')->required()->label('Slug'),
                         Forms\Components\TextInput::make('email')->email()->required()->label('E-mail'),
                         Forms\Components\TextInput::make('phone')->label('Telefone'),
                         Forms\Components\TextInput::make('password')->label('Senha')
@@ -56,13 +56,25 @@ class UserResource extends Resource
                             ->image()
                             ->disk('public')
                             ->directory('products')
-                            ->imageEditor(),
+                            ->imageEditor()
+                            ->validationMessages([
+                                'required' => 'O campo banner é obrigatório.',
+                                'image' => 'O arquivo deve ser uma imagem.',
+                                'mimes' => 'A imagem deve ser dos tipos: jpeg, png, jpg ou webp.',
+                                'max' => 'A imagem não pode ter mais de 2 MB.',
+                            ]),
                         Forms\Components\FileUpload::make('cover_image')
                             ->label('Imagem de Capa')
                             ->image()
                             ->disk('public')
                             ->directory('products')
-                            ->imageEditor(),
+                            ->imageEditor()
+                            ->validationMessages([
+                                'required' => 'O campo banner é obrigatório.',
+                                'image' => 'O arquivo deve ser uma imagem.',
+                                'mimes' => 'A imagem deve ser dos tipos: jpeg, png, jpg ou webp.',
+                                'max' => 'A imagem não pode ter mais de 2 MB.',
+                            ]),
                         Forms\Components\TextInput::make('primary_color')->label('Cor Primária'),
                         Forms\Components\TextInput::make('secondary_color')->label('Cor Secundária'),
                         // Forms\Components\TextInput::make('template')->label('Template'),
@@ -71,25 +83,35 @@ class UserResource extends Resource
 
                 Forms\Components\Section::make('Redes Sociais')
                     ->schema([
-                        Forms\Components\TextInput::make('facebook')->label('Facebook'),
-                        Forms\Components\TextInput::make('whatsapp')->label('WhatsApp'),
-                        Forms\Components\TextInput::make('instagram')->label('Instagram'),
-                        Forms\Components\TextInput::make('twitter')->label('Twitter'),
-                        Forms\Components\TextInput::make('linkedin')->label('LinkedIn'),
-                        Forms\Components\KeyValue::make('other_social_networks')->label('Outras Redes Sociais'),
-                    ])
-                    ->columns(2),
+                        Forms\Components\TextInput::make('facebook')->label('Facebook') ->url(),
+                        Forms\Components\TextInput::make('whatsapp')->label('WhatsApp') ->url(),
+                        Forms\Components\TextInput::make('instagram')->label('Instagram') ->url(),
+                        Forms\Components\TextInput::make('twitter')->label('Twitter') ->url(),
+                        Forms\Components\TextInput::make('linkedin')->label('LinkedIn') ->url(),
+                        Forms\Components\Repeater::make('other_social_networks')
+                            ->label('Outras Redes Sociais')
+                            ->addActionLabel('Adicionar outra rede social')
+                            ->schema([
+                                Forms\Components\TextInput::make('name')
+                                    ->label('Rede Social'),
 
+                                Forms\Components\TextInput::make('url')
+                                    ->label('Link')
+                                    ->url(),
+                            ])
+                            ->columns(2),
+                         ])     
+                    ->columns(2),
                 Forms\Components\Section::make('Endereço')
                     ->schema([
-                        Forms\Components\TextInput::make('address')->label('Endereço'),
-                        Forms\Components\TextInput::make('number')->label('Número'),
-                        Forms\Components\TextInput::make('neighborhood')->label('Bairro'),
-                        Forms\Components\TextInput::make('city')->label('Cidade'),
-                        Forms\Components\TextInput::make('state')->label('Estado'),
-                        Forms\Components\TextInput::make('country')->label('País'),
-                        Forms\Components\TextInput::make('zipcode')->label('CEP'),
-                        Forms\Components\TextInput::make('location_link')->label('Link de Localização')->url()->maxLength(255),
+                        Forms\Components\TextInput::make('address')->label('Endereço') ->maxlength(100),
+                        Forms\Components\TextInput::make('number')->label('Número') ->maxlength(100),
+                        Forms\Components\TextInput::make('neighborhood')->label('Bairro') ->maxlength(100),
+                        Forms\Components\TextInput::make('city')->label('Cidade') ->maxlength(100),
+                        Forms\Components\TextInput::make('state')->label('Estado') ->maxlength(100),
+                        Forms\Components\TextInput::make('country')->label('País') ->maxlength(100),
+                        Forms\Components\TextInput::make('zipcode')->label('CEP') ->maxlength(100),
+                        Forms\Components\TextInput::make('location_link')->label('Link de Localização') ->url(),
                     ])
                     ->columns(2),
 

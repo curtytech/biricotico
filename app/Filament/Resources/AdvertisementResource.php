@@ -52,7 +52,13 @@ class AdvertisementResource extends Resource
                             ->required()
                             ->image()
                             ->maxSize(2048)
-                            ->directory('advertisements/banners'),
+                            ->directory('advertisements/banners')
+                            ->validationMessages([
+                                'required' => 'O campo banner é obrigatório.',
+                                'image' => 'O arquivo deve ser uma imagem.',
+                                'mimes' => 'A imagem deve ser dos tipos: jpeg, png, jpg ou webp.',
+                                'max' => 'A imagem não pode ter mais de 2 MB.',
+                            ]),
                         Forms\Components\TextInput::make('external_link')
                             ->label('Link Externo')
                             ->required()

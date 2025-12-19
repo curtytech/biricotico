@@ -53,7 +53,13 @@ class NewsResource extends Resource
                     ->image()
                     ->disk('public')
                     ->directory('news')
-                    ->maxSize(2048),
+                    ->maxSize(2048)
+                    ->validationMessages([
+                        'required' => 'O campo banner é obrigatório.',
+                        'image' => 'O arquivo deve ser uma imagem.',
+                        'mimes' => 'A imagem deve ser dos tipos: jpeg, png, jpg ou webp.',
+                        'max' => 'A imagem não pode ter mais de 2 MB.',
+                    ]),
                 Forms\Components\TextInput::make('external_link')
                     ->label('Link Externo')
                     ->required()
