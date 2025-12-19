@@ -32,9 +32,9 @@ class EventResource extends Resource
                         Forms\Components\TextInput::make('name')
                             ->label('Nome do Evento')
                             ->required()
-                            ->maxLength(255),
+                            ->maxLength(100),
 
-                               Forms\Components\TextInput::make('price')
+                        Forms\Components\TextInput::make('price')
                             ->label('Preço')
                             ->required()
                             ->numeric()
@@ -45,7 +45,7 @@ class EventResource extends Resource
                             ->label('Descrição')
                             ->required()
                             ->rows(3)
-                            ->maxLength(1000),
+                            ->maxLength(500),
 
                         Forms\Components\FileUpload::make('banner')
                             ->label('Banner')
@@ -54,7 +54,13 @@ class EventResource extends Resource
                             ->disk('public')
                             ->directory('events')
                             ->maxSize(2048)
-                            ->rules(['mimes:jpeg,png,jpg,webp']),
+                            ->rules(['mimes:jpeg,png,jpg,webp'])
+                            ->validationMessages([
+                                'required' => 'O campo banner é obrigatório.',
+                                'image' => 'O arquivo deve ser uma imagem.',
+                                'mimes' => 'A imagem deve ser dos tipos: jpeg, png, jpg ou webp.',
+                                'max' => 'A imagem não pode ter mais de 2 MB.',
+                            ]),
 
                         Forms\Components\TextInput::make('external_link')
                             ->label('Link Externo')
@@ -97,17 +103,17 @@ class EventResource extends Resource
                     ])
                     ->columns(2),
 
-                // Forms\Components\Section::make('Controle de Acesso')
-                //     ->schema([
-                //         Forms\Components\Select::make('user_id')
-                //             ->label('Organizador')
-                //             ->relationship('user', 'name')
-                //             ->visible(fn() => auth()->user()?->role === 'admin')
-                //             ->default(fn() => auth()->id())
-                //             ->required(),
-                //     ])
-                //     ->collapsible()
-                //     ->collapsed(fn() => auth()->user()?->role !== 'admin'),
+                Forms\Components\Section::make('Controle de Acesso')
+                    ->schema([
+                        Forms\Components\Select::make('user_id')
+                            ->label('Organizador')
+                            ->relationship('user', 'name')
+                            ->visible(fn() => auth()->user()?->role === 'admin')
+                            ->default(fn() => auth()->id())
+                            ->required(),
+                    ])
+                    ->collapsible()
+                    ->collapsed(fn() => auth()->user()?->role !== 'admin'),
             ]);
         }
 

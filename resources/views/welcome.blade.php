@@ -358,7 +358,7 @@
                     <h5 class="font-semibold">Links</h5>
                     <ul class="mt-2 text-sm text-slate-400 space-y-1">
                         <a href="#features" class="text-white hover:text-amber-400 transition">
-                            <li>Funcionalidade</li>
+                            <li>Funcionalidades</li>
                         </a>
                         <a href="#events" class="text-white hover:text-amber-400 transition">
                             <li>Shows</li>
