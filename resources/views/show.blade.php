@@ -60,12 +60,12 @@
 
     <main class="pt-28">
         <section class="relative min-h-screen flex items-center justify-center bg-gray-900">
-            <div class="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-50" style="background-image: url({{ $user->cover_image ?? asset('img/biricotico.jpg') }})"></div>
+            <div class="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-50" style="background-image: url( '{{ Storage::url($user->cover_image) ?? asset(img/biricotico.jpg) }}');"></div>
             <div class="absolute inset-0 bg-amber-500 opacity-5"></div>
             <div class="relative max-w-7xl mx-auto w-full py-12 md:py-20 px-4 sm:px-6 lg:px-8 text-center">
                 <span class="animate-pulse" style="animation-duration: 4s;">
                     <div class="inline-block mb-3">
-                        <img class="w-20 h-20 rounded-full object-cover ring-2 ring-amber-500" src="{{ $user->image ?? 'https://images.unsplash.com/photo-1665686310934-8fab52b3821b?auto=format&fit=crop&w=256&q=60' }}" alt="avatar" />
+                        <img class="w-20 h-20 rounded-full object-cover ring-2 ring-amber-500" src="{{ Storage::url($user->image) ?? 'https://images.unsplash.com/photo-1665686310934-8fab52b3821b?auto=format&fit=crop&w=256&q=60' }}" alt="avatar" />
 
                     </div>
                     <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 sm:mb-6 leading-tight">
@@ -121,7 +121,7 @@
                 <div class="antialiased text-gray-900 ">
                     <div class="bg-white rounded-lg overflow-hidden shadow-2xl  group overflow-hidden transition-transform duration-300 hover:translate-y-[-10px]">
                         <div class="h-48 w-full overflow-hidden">
-                            <img class="h-full w-full object-cover transform overflow-hidden transition-transform duration-[300ms] group-hover:scale-125 object-end" src="{{ $ad->banner ?? 'https://images.unsplash.com/photo-1512428559087-560fa5ceab42?auto=format&fit=crop&w=1200&q=60' }}" alt="Home in Countryside" />
+                            <img class="h-full w-full object-cover transform overflow-hidden transition-transform duration-[300ms] group-hover:scale-125 object-end" src="{{ Storage::url($ad->banner) ?? 'https://images.unsplash.com/photo-1512428559087-560fa5ceab42?auto=format&fit=crop&w=1200&q=60' }}" alt="Home in Countryside" />
                         </div>
 
                         <div class="p-6 pb-4 group-hover:bg-gray-700 duration-[0.3s]">
@@ -143,7 +143,7 @@
                 <div class="antialiased text-gray-900 ">
                     <div class="bg-white rounded-lg overflow-hidden shadow-2xl group overflow-hidden transition-transform duration-300 hover:translate-y-[-10px]">
                         <div class="h-48 w-full overflow-hidden">
-                            <img class="h-full w-full object-cover transform overflow-hidden transition-transform duration-[300ms] group-hover:scale-125 object-end" src="{{ $news->banner ?? 'https://images.unsplash.com/photo-1512428559087-560fa5ceab42?auto=format&fit=crop&w=1200&q=60' }}" alt="Home in Countryside" />
+                            <img class="h-full w-full object-cover transform overflow-hidden transition-transform duration-[300ms] group-hover:scale-125 object-end" src="{{ Storage::url($news->banner) ?? 'https://images.unsplash.com/photo-1512428559087-560fa5ceab42?auto=format&fit=crop&w=1200&q=60' }}" alt="Home in Countryside" />
                         </div>
 
                         <div class="p-6 pb-4 group-hover:bg-gray-700 duration-[0.3s]">
@@ -183,7 +183,7 @@
                         <div class="h-48 w-full overflow-hidden relative">
                             <img
                                 class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-125 object-end"
-                                src="{{ $event->banner ?? 'https://images.unsplash.com/photo-1512428559087-560fa5ceab42?auto=format&fit=crop&w=1200&q=60' }}"
+                                src="{{ Storage::url($event->banner) ?? 'https://images.unsplash.com/photo-1512428559087-560fa5ceab42?auto=format&fit=crop&w=1200&q=60' }}"
                                 alt="{{ $event->name }}" />
                         </div>
 
@@ -221,7 +221,7 @@
                                 <div class="flex-shrink-0">
                                     <a href="#">
                                         <span class="sr-only text-amber-600">{{ $user->name }}</span>
-                                        <img class="h-10 w-10 rounded-full" src="{{ $user->image  ?? 'https://images.unsplash.com/photo-1512428559087-560fa5ceab42?auto=format&fit=crop&w=1200&q=60' }}" alt="">
+                                        <img class="h-10 w-10 rounded-full" src="{{ Storage::url($user->image) ?? 'https://images.unsplash.com/photo-1512428559087-560fa5ceab42?auto=format&fit=crop&w=1200&q=60' }}" alt="">
                                     </a>
                                 </div>
                                 <div class="ml-3">
