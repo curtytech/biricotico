@@ -58,7 +58,6 @@ class UserResource extends Resource
                             ->directory('products')
                             ->imageEditor()
                             ->validationMessages([
-                                'required' => 'O campo banner é obrigatório.',
                                 'image' => 'O arquivo deve ser uma imagem.',
                                 'mimes' => 'A imagem deve ser dos tipos: jpeg, png, jpg ou webp.',
                                 'max' => 'A imagem não pode ter mais de 2 MB.',
@@ -84,7 +83,7 @@ class UserResource extends Resource
                 Forms\Components\Section::make('Redes Sociais')
                     ->schema([
                         Forms\Components\TextInput::make('facebook')->label('Facebook') ->url(),
-                        Forms\Components\TextInput::make('whatsapp')->label('WhatsApp') ->url(),
+                        Forms\Components\TextInput::make('whatsapp')->label('WhatsApp'),
                         Forms\Components\TextInput::make('instagram')->label('Instagram') ->url(),
                         Forms\Components\TextInput::make('twitter')->label('Twitter') ->url(),
                         Forms\Components\TextInput::make('linkedin')->label('LinkedIn') ->url(),
@@ -111,7 +110,7 @@ class UserResource extends Resource
                         Forms\Components\TextInput::make('state')->label('Estado') ->maxlength(100),
                         Forms\Components\TextInput::make('country')->label('País') ->maxlength(100),
                         Forms\Components\TextInput::make('zipcode')->label('CEP') ->maxlength(100),
-                        Forms\Components\TextInput::make('location_link')->label('Link de Localização') ->url(),
+                        Forms\Components\TextInput::make('location_link')->label('Link de Localização'),
                     ])
                     ->columns(2),
 
