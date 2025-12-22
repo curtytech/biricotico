@@ -66,14 +66,6 @@ ngrok http 80 --host-header=cardapiovirtual
 
 
 ### Criar um link simbólico (symlink)
-cd ~/domains/nome-do-dominio/public_html
-ln -s /home/u233139548/domains/cardapiovirtual.space/storage/app/public storage
+cd /home/u233139548/domains/you.tec.br/public_html/biricotico/public
 
-
-ln -s //home/u359724568/domains/mcboutique.com.br/storage/app/public storage
-
-/home/u233139548/domains/you.tec.br/public_html/blog
-
-cd ~/home/u233139548/domains/you.tec.br/public_html/storage/app/public storage
-
-ln -s /home/u233139548/domains/you.tec.br/public_html/blog/storage/app/public storage
+ln -s /home/u233139548/domains/you.tec.br/public_html/biricotico/storage/app/public storage

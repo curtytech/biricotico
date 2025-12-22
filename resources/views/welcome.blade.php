@@ -152,7 +152,7 @@
                         <div class="h-48 w-full overflow-hidden relative">
                             <img
                                 class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-125 object-end"
-                                src="{{ $event->banner ?? 'https://images.unsplash.com/photo-1512428559087-560fa5ceab42?auto=format&fit=crop&w=1200&q=60' }}"
+                                src="{{ Storage::url($event->banner ?? 'https://images.unsplash.com/photo-1512428559087-560fa5ceab42?auto=format&fit=crop&w=1200&q=60') }}"
                                 alt="{{ $event->name }}" />
                         </div>
 
@@ -190,7 +190,7 @@
                                 <div class="flex-shrink-0">
                                     <a href="#">
                                         <span class="sr-only text-amber-600">{{ $event->user->name }}</span>
-                                        <img class="h-10 w-10 rounded-full" src="{{ $event->user->image ?? 'https://images.unsplash.com/photo-1512428559087-560fa5ceab42?auto=format&fit=crop&w=1200&q=60' }}" alt="">
+                                        <img class="h-10 w-10 rounded-full" src="{{ Storage::url($event->user->image) ?? 'https://images.unsplash.com/photo-1512428559087-560fa5ceab42?auto=format&fit=crop&w=1200&q=60' }}" alt="">
                                     </a>
                                 </div>
                                 <div class="ml-3">
@@ -201,7 +201,6 @@
                                     </div>
                                 </div>
                             </div>
-
 
                             @if($event->external_link)
                             <div class="mt-3">
@@ -230,18 +229,13 @@
                 @forelse($users as $user)
                 <a href="{{ route('users.show', $user->slug) }}">
                     <div class="w-full flex flex-col bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-500 rounded-xl pb-4">
-
-                        {{-- Fundo do card --}}
-
                         <div
                             class="h-[3.5rem] relative rounded-t-xl bg-cover bg-center"
-                            style="background-image: url('{{ $user->cover_image }}');">
-
+                            style="background-image: url('{{ Storage::url($user->cover_image) }}');">
                             {{-- Avatar --}}
-
                             <img
                                 class="absolute -bottom-8 left-2 z-10 w-[3.5rem] h-[3.5rem] rounded-full object-cover"
-                                src="{{ $user->image }}"
+                                src="{{ Storage::url($user->image) }}"
                                 alt="avatar do {{ $user->name }}" />
                         </div>
 
@@ -317,7 +311,7 @@
                 <div class="antialiased text-gray-900 ">
                     <div class="bg-white rounded-lg overflow-hidden shadow-2xl  group overflow-hidden transition-transform duration-300 hover:translate-y-[-10px]">
                         <div class="h-48 w-full overflow-hidden">
-                            <img class="h-full w-full object-cover transform overflow-hidden transition-transform duration-[300ms] group-hover:scale-125 object-end" src="{{ $news->banner ?? 'https://images.unsplash.com/photo-1512428559087-560fa5ceab42?auto=format&fit=crop&w=1200&q=60' }}" alt="Home in Countryside" />
+                            <img class="h-full w-full object-cover transform overflow-hidden transition-transform duration-[300ms] group-hover:scale-125 object-end" src="{{ Storage::url($news->banner) ?? 'https://images.unsplash.com/photo-1512428559087-560fa5ceab42?auto=format&fit=crop&w=1200&q=60' }}" alt="Home in Countryside" />
                         </div>
 
                         <div class="p-6 pb-4 group-hover:bg-gray-700 duration-[0.3s]">
