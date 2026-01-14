@@ -152,8 +152,8 @@
                             <div class="mt-4 flex items-center">
                                 <div class="flex-shrink-0">
                                     <a href="#">
-                                        <span class="sr-only text-amber-600">{{ $user->name }}</span>
-                                        <img class="h-10 w-10 rounded-full" src="{{ $user->image }}" alt="">
+                                        <span class="sr-only text-amber-600">{{ $news->user->name }}</span>
+                                        <img class="h-10 w-10 rounded-full" src="{{ Storage::url($news->user->image) ?? 'https://images.unsplash.com/photo-1512428559087-560fa5ceab42?auto=format&fit=crop&w=1200&q=60' }}" alt="">
                                     </a>
                                 </div>
                                 <div class="ml-3">
