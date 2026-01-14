@@ -102,7 +102,6 @@
                         </a>
                     </div>
                 </a>
-
             </div>
         </section>
 
@@ -221,7 +220,6 @@
         </section>
 
         <!-- Bars / Localizado -->
-
         <section id="bars" class="max-w-6xl mx-auto px-6 py-12">
             <h3 class="text-2xl font-bold text-white text-center">Bares Participantes </h3>
 
@@ -261,7 +259,6 @@
                 @endforelse
             </div>
         </section>
-
 
         <section id="women" class="relative overflow-hidden">
             <div class="absolute inset-0 bg-gradient-to-br from-pink-500 via-rose-500 to-amber-500 opacity-90"></div>
@@ -320,8 +317,8 @@
                             <div class="mt-4 flex items-center">
                                 <div class="flex-shrink-0">
                                     <a href="#">
-                                        <span class="sr-only text-amber-600">{{ $user->name }}</span>
-                                        <img class="h-10 w-10 rounded-full" src="{{ $user->image }}" alt="">
+                                        <span class="sr-only text-amber-600">{{ $news->user->name }}</span>
+                                        <img class="h-10 w-10 rounded-full" src="{{ Storage::url($news->user->image) ?? 'https://images.unsplash.com/photo-1512428559087-560fa5ceab42?auto=format&fit=crop&w=1200&q=60' }}" alt="">
                                     </a>
                                 </div>
                                 <div class="ml-3">
